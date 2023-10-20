@@ -23,7 +23,7 @@ export default function SurveyView() {
   })
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
-  const {slug} = useParams()
+  const {id} = useParams()
   const {showToast} = useStateContext()
 
 
@@ -45,7 +45,7 @@ export default function SurveyView() {
     delete payload.image_url;
 
     // check if you need to send update or create request
-    if (slug) {
+    if (id) {
       res = Axios.put(`/survey/${survey.id}`, payload)
     } else {
       res = Axios.post('/survey', payload)
@@ -55,7 +55,7 @@ export default function SurveyView() {
     res
       .then(({data}) => {
         // show success message
-        if (slug) {
+        if (id) {
           setSurvey(data.data)
           showToast('Survey Updated Successfully');
         } else {
@@ -111,9 +111,9 @@ export default function SurveyView() {
 
   // on mount
   useEffect(() => {
-    if (slug) {
+    if (id) {
       setLoading(true)
-      Axios.get(`/survey/${slug}`)
+      Axios.get(`/survey/${id}`)
         .then(({data}) => {
           setSurvey(data.data)
           setLoading(false)
@@ -128,9 +128,9 @@ export default function SurveyView() {
   }, []);
   return (
     <>
-      <DashboardPage title={slug ? 'Update Survey' : 'Create new Survey'} buttons={(
+      <DashboardPage title={id ? 'Update Survey' : 'Create new Survey'} buttons={(
         <div>
-          {slug && (
+          {id && (
             <div className='flex flex-row gap-2 items-center justify-around'>
               <CustomButton link to={`/view/surveys/${survey.slug}`} target='_blank'>
                 <FiExternalLink className='w-5 h-5 mr-2'/> Public Link
@@ -234,7 +234,7 @@ export default function SurveyView() {
                            onChange={(event) => setSurvey({...survey, status: event.target.checked})}/>
                   </div>
                   <div className='ml-3 text-sm'>
-                    <label htmlFor="status" className="font-medium text-gray-700">
+                    <label htmlFor="" className="font-medium text-gray-700">
                       Active
                     </label>
                     <p className="text-gray-500">

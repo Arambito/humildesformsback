@@ -9,7 +9,6 @@ import DefaultLayout from "../Layouts/DefaultLayout.jsx";
 import Dashboard from "../views/Dashboard.jsx";
 import SurveyView from "../views/SurveyView.jsx";
 import PublicSurveyView from "../views/PublicSurveyView.jsx";
-import {ThanksView} from "../views/ThanksView.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +28,7 @@ const router = createBrowserRouter([
         element: <Surveys/>
       },
       {
-        path: '/surveys/:slug',
+        path: '/surveys/:id',
         element: <SurveyView/>
       },
       {
@@ -55,10 +54,6 @@ const router = createBrowserRouter([
   {
     path: '/view/surveys/:slug',
     element: <PublicSurveyView/>
-  },
-  {
-    path: '/thanks',
-    element: <ThanksView/>
   }
 ]);
 

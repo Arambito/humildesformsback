@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::apiResource('survey', \App\Http\Controllers\SurveyController::class)->except('show');
-    Route::get('survey/{survey:slug}', [\App\Http\Controllers\SurveyController::class, 'show']);
+    Route::apiResource('survey', \App\Http\Controllers\SurveyController::class);
 
     // dashboard
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);

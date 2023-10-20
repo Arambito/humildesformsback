@@ -13,18 +13,28 @@ export default function Dashboard() {
   let chart = Chart
   // charts data
   const data = {
-    labels: statistics.answers_of_the_month_statistics_labels, datasets: [{
+    labels: statistics.answers_labels, datasets: [{
       label: "Total Answers",
-      backgroundColor: ["rgb(241, 90, 90)", "rgb(250, 152, 58)", "rgb(255, 211, 89)", "rgb(84, 205, 131)", "rgb(102, 204, 255)", "rgb(0, 153, 204)", "rgb(109, 33, 79)", "rgb(145, 61, 136)", "rgb(222, 137, 147)", "rgb(204, 204, 204)"],
+      backgroundColor: [
+        "rgb(241, 90, 90)",
+        "rgb(250, 152, 58)",
+        "rgb(255, 211, 89)",
+        "rgb(84, 205, 131)",
+        "rgb(102, 204, 255)",
+        "rgb(0, 153, 204)",
+        "rgb(109, 33, 79)",
+        "rgb(145, 61, 136)",
+        "rgb(222, 137, 147)",
+        "rgb(204, 204, 204)"],
       borderColor: "rgb(255, 255, 255)",
-      data: statistics.answers_of_the_month_statistics_data,
+      data: statistics.answers_data,
     },],
   };
 
   useEffect(() => {
     Axios.get('/dashboard')
       .then(({data}) => {
-        setStatistics({...data});
+        setStatistics(data);
       })
   }, [])
   return (<>
@@ -102,7 +112,7 @@ export default function Dashboard() {
                 </thead>
                 <tbody className='border border-gray-100 rounded-lg'>
                 {statistics.top_surveys && statistics.top_surveys.map((survey, index) => (
-                  <tr key={index}>
+                  <tr>
                     <th>
                       <label>
                         <input type="checkbox" className="checkbox"/>
@@ -130,9 +140,10 @@ export default function Dashboard() {
                         <div className="badge badge-sm bg-gray-400 border-gray-400"> hidden</div>)}
                     </td>
                     <th>
-                      <a href={`/surveys/${survey.slug}`} className="btn btn-ghost btn-xs">details</a>
+                      <a href={`/surveys/${survey.id}`} className="btn btn-ghost btn-xs">details</a>
                     </th>
-                  </tr>))}
+                  </tr>
+                ))}
 
                 </tbody>
 
